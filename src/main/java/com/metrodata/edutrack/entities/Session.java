@@ -14,7 +14,6 @@ import java.util.List;
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UniqueID")
     private Long id;
 
     @Column(length = 100, nullable = false)
@@ -33,7 +32,7 @@ public class Session {
     private Boolean needAttendance;
 
     @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "UniqueID")
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
     private Event event;
 
     @OneToMany(mappedBy = "session", cascade = CascadeType.ALL)

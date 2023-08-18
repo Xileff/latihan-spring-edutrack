@@ -10,14 +10,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor @NoArgsConstructor
 public class CertificateTemplate {
     @Id
-    @Column(name = "UniqueID")
-    private long id;
+    private Long id;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String certificate_url;
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "UniqueID", nullable = false)
+    @JoinColumn(name = "id", nullable = false)
     private SessionDetail sessionDetail;
 }

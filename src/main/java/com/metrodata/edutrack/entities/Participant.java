@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class Participant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UniqueID")
     private Long id;
 
     @Column(length = 100, nullable = false)
@@ -35,7 +34,7 @@ public class Participant {
     private Occupation occupation;
 
     @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "UniqueID")
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
     private Event event;
 
     @OneToOne(mappedBy = "participant")

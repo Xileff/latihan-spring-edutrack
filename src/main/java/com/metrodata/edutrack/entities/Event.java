@@ -16,7 +16,6 @@ import java.util.List;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UniqueID")
     private Long id;
 
     @Column(length = 100, nullable = false)
@@ -53,7 +52,7 @@ public class Event {
     private String imageUrl;
 
     @Column(nullable = false)
-    private boolean status;
+    private Boolean status;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Sponsor> sponsors;

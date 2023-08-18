@@ -13,7 +13,6 @@ import java.util.List;
 public class Speaker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UniqueID")
     private Long id;
 
     @Column(length = 100, nullable = false)
@@ -32,6 +31,6 @@ public class Speaker {
     private List<SessionSpeaker> sessionSpeakers;
 
     @ManyToOne
-    @JoinColumn(name = "sponsor_id", referencedColumnName = "UniqueID")
+    @JoinColumn(name = "sponsor_id", referencedColumnName = "id")
     private Sponsor sponsor;
 }

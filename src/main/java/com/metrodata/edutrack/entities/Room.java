@@ -13,7 +13,6 @@ import java.util.List;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UniqueID")
     private Long id;
 
     @Column(nullable = false, length = 100)

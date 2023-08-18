@@ -13,7 +13,6 @@ import java.util.List;
 public class SessionDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UniqueID")
     private Long id;
 
     @Column(length = 100, nullable = false)
@@ -39,6 +38,6 @@ public class SessionDetail {
     private List<SessionRegistrant> sessionRegistrants;
 
     @ManyToOne
-    @JoinColumn(name = "session_id", referencedColumnName = "UniqueID")
+    @JoinColumn(name = "session_id", referencedColumnName = "id")
     private Session session;
 }

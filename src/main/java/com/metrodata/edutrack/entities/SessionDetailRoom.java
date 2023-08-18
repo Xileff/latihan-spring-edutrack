@@ -11,14 +11,13 @@ import lombok.NoArgsConstructor;
 public class SessionDetailRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UniqueID")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "room_id", referencedColumnName = "UniqueID")
+    @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
 
     @ManyToOne
-    @JoinColumn(name = "session_detail_id", referencedColumnName = "UniqueID")
+    @JoinColumn(name = "session_detail_id", referencedColumnName = "id")
     private SessionDetail sessionDetail;
 }

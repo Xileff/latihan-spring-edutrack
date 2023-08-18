@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 public class SessionRegistrant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UniqueID")
     private Long id;
 
     @Column(name = "attended_at")
@@ -34,10 +33,10 @@ public class SessionRegistrant {
     private Boolean isReminderSent;
 
     @ManyToOne
-    @JoinColumn(name = "participant_id", referencedColumnName = "UniqueID")
+    @JoinColumn(name = "participant_id", referencedColumnName = "id")
     private Participant participant;
 
     @ManyToOne
-    @JoinColumn(name = "session_detail_id", referencedColumnName = "UniqueID")
+    @JoinColumn(name = "session_detail_id", referencedColumnName = "id")
     private SessionDetail sessionDetail;
 }
