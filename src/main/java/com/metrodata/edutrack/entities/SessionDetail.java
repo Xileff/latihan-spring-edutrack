@@ -16,7 +16,7 @@ public class SessionDetail {
     private Long id;
 
     @Column(length = 100, nullable = false)
-    private Long name;
+    private String name;
 
     @Column(nullable = false)
     private Integer capacity;

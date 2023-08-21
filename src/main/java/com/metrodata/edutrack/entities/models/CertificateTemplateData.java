@@ -6,5 +6,4 @@ import lombok.Data;
 public class CertificateTemplateData {
     private Long id;
     private String certificateUrl;
-    private Long sessionDetailId;
 }

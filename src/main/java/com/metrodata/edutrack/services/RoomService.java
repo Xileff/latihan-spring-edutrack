@@ -4,6 +4,7 @@ import com.metrodata.edutrack.entities.Room;
 import com.metrodata.edutrack.entities.models.ResponseData;
 import com.metrodata.edutrack.entities.models.RoomData;
 import com.metrodata.edutrack.repositories.RoomRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,6 +15,7 @@ import java.util.List;
 public class RoomService {
     private RoomRepository roomRepository;
 
+    @Autowired
     public RoomService(RoomRepository roomRepository) {
         this.roomRepository = roomRepository;
     }

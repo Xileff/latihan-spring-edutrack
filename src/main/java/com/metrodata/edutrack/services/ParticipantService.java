@@ -4,6 +4,7 @@ import com.metrodata.edutrack.entities.Participant;
 import com.metrodata.edutrack.entities.models.ParticipantData;
 import com.metrodata.edutrack.entities.models.ResponseData;
 import com.metrodata.edutrack.repositories.ParticipantRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -15,6 +16,7 @@ public class ParticipantService {
     private ParticipantRepository participantRepository;
     private EventService eventService;
 
+    @Autowired
     public ParticipantService(ParticipantRepository participantRepository, EventService eventService) {
         this.participantRepository = participantRepository;
         this.eventService = eventService;

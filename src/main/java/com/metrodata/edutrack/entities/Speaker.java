@@ -16,7 +16,7 @@ public class Speaker {
     private Long id;
 
     @Column(length = 100, nullable = false)
-    private Long name;
+    private String name;
 
     @Column(name = "photo_url", columnDefinition = "TEXT", nullable = false)
     private String photoUrl;
