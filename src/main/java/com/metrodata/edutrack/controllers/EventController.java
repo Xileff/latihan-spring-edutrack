@@ -1,6 +1,7 @@
 package com.metrodata.edutrack.controllers;
 
 import com.metrodata.edutrack.entities.Event;
+import com.metrodata.edutrack.entities.models.EventData;
 import com.metrodata.edutrack.entities.models.ResponseData;
 import com.metrodata.edutrack.services.EventService;
 import jakarta.websocket.server.PathParam;
@@ -29,13 +30,13 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseData<Event> insertEvent(@RequestBody Event event) {
-        return eventService.insertEvent(event);
+    public ResponseData<Event> insertEvent(@RequestBody EventData eventData) {
+        return eventService.insertEvent(eventData);
     }
 
     @PatchMapping("{id}")
-    public ResponseData<Event> updateEvent(@PathVariable Long id, @RequestBody Event event) {
-        return eventService.updateEvent(id, event);
+    public ResponseData<Event> updateEvent(@PathVariable Long id, @RequestBody EventData eventData) {
+        return eventService.updateEvent(id, eventData);
     }
 
     @DeleteMapping("{id}")

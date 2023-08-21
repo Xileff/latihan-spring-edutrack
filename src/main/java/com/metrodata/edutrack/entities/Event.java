@@ -46,7 +46,7 @@ public class Event {
     private LocalDateTime closeRegistration;
 
     @Column(nullable = false)
-    private int capacity;
+    private Integer capacity;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -60,12 +60,12 @@ public class Event {
     @Column(nullable = false)
     private Boolean isPublished;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Sponsor> sponsors;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Participant> participants;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Session> sessions;
 }

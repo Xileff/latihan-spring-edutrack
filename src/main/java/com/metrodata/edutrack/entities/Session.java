@@ -1,5 +1,6 @@
 package com.metrodata.edutrack.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.metrodata.edutrack.entities.enums.SessionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,9 +21,11 @@ public class Session {
     @Column(length = 100, nullable = false)
     private String name;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     @Column(name = "start_time", nullable = false)
     private LocalTime startTime;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     @Column(name = "end_time", nullable = false)
     private LocalTime endTime;
 
