@@ -1,7 +1,7 @@
 package com.metrodata.edutrack.entities;
 
 
-import com.metrodata.edutrack.entities.enums.Category;
+import com.metrodata.edutrack.entities.enums.SponsorCategory;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +25,7 @@ public class Sponsor {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Category category;
+    private SponsorCategory sponsorCategory;
 
     @OneToMany(mappedBy = "sponsor", cascade = CascadeType.ALL)
     private List<Speaker> speakers;

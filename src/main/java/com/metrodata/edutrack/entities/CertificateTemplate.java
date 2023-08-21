@@ -12,8 +12,8 @@ public class CertificateTemplate {
     @Id
     private Long id;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String certificate_url;
+    @Column(name="certificate_url", nullable = false, columnDefinition = "TEXT")
+    private String certificateUrl;
 
     @OneToOne
     @MapsId

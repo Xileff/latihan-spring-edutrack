@@ -1,5 +1,5 @@
 package com.metrodata.edutrack.entities.enums;
 
-public enum Status {
+public enum ParticipantStatus {
     Active, Reject, WaitingList
 }

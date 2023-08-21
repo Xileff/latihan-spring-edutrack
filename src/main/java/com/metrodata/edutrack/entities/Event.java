@@ -1,5 +1,6 @@
 package com.metrodata.edutrack.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,18 +25,23 @@ public class Event {
     @Column(length = 50, nullable = false)
     private String slug;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     @Column(name = "start_time", nullable = false)
     private LocalTime startTime;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "start_registration", nullable = false)
     private LocalDateTime startRegistration;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "close_registration", nullable = false)
     private LocalDateTime closeRegistration;
 
@@ -52,7 +58,7 @@ public class Event {
     private String imageUrl;
 
     @Column(nullable = false)
-    private Boolean status;
+    private Boolean isPublished;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Sponsor> sponsors;

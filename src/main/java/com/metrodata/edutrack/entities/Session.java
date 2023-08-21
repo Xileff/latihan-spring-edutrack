@@ -1,5 +1,6 @@
 package com.metrodata.edutrack.entities;
 
+import com.metrodata.edutrack.entities.enums.SessionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,9 @@ public class Session {
 
     @Column(name = "need_attendance", nullable = false)
     private Boolean needAttendance;
+
+    @Enumerated(EnumType.STRING)
+    private SessionType type;
 
     @ManyToOne
     @JoinColumn(name = "event_id", referencedColumnName = "id")

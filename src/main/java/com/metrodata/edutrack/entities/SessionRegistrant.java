@@ -1,6 +1,6 @@
 package com.metrodata.edutrack.entities;
 
-import com.metrodata.edutrack.entities.enums.Status;
+import com.metrodata.edutrack.entities.enums.ParticipantStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +24,7 @@ public class SessionRegistrant {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status;
+    private ParticipantStatus participantStatus;
 
     @Column(name = "registered_at", nullable = false)
     private LocalDateTime registeredAt;

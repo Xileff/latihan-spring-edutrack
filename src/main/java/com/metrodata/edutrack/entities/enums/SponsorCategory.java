@@ -1,5 +1,5 @@
 package com.metrodata.edutrack.entities.enums;
 
-public enum Category {
+public enum SponsorCategory {
     Mega, Giga, Tera, SUPPORT
 }
