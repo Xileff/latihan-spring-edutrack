@@ -1,5 +1,7 @@
 package com.metrodata.edutrack.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,10 +29,12 @@ public class Speaker {
     @Column(length = 100, nullable = false)
     private String company;
 
-    @OneToMany(mappedBy = "speaker", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "speaker", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<SessionSpeaker> sessionSpeakers;
 
     @ManyToOne
     @JoinColumn(name = "sponsor_id", referencedColumnName = "id")
+    @JsonBackReference
     private Sponsor sponsor;
 }

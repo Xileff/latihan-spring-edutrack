@@ -1,6 +1,8 @@
 package com.metrodata.edutrack.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.metrodata.edutrack.entities.enums.SessionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -40,9 +42,11 @@ public class Session {
 
     @ManyToOne
     @JoinColumn(name = "event_id", referencedColumnName = "id")
+    @JsonBackReference
     private Event event;
 
-    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<SessionDetail> sessionDetails;
 
 

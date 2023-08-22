@@ -13,8 +13,8 @@ import java.util.List;
 
 @Service
 public class ParticipantService {
-    private ParticipantRepository participantRepository;
-    private EventService eventService;
+    private final ParticipantRepository participantRepository;
+    private final EventService eventService;
 
     @Autowired
     public ParticipantService(ParticipantRepository participantRepository, EventService eventService) {
@@ -43,6 +43,7 @@ public class ParticipantService {
             participant.setEvent(eventService.getEventById(participantData.getEventId()));
             return new ResponseData<>(participantRepository.save(participant), "Participant inserted successfully.");
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }

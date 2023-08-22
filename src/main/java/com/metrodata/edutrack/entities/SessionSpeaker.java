@@ -1,5 +1,6 @@
 package com.metrodata.edutrack.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,9 +16,11 @@ public class SessionSpeaker {
 
     @ManyToOne
     @JoinColumn(name = "speaker_id", referencedColumnName = "id")
+    @JsonBackReference
     private Speaker speaker;
 
     @ManyToOne
     @JoinColumn(name = "session_detail_id", referencedColumnName = "id")
+    @JsonBackReference
     private SessionDetail sessionDetail;
 }

@@ -45,7 +45,6 @@ public class EventService {
             event.setIsPublished(eventData.getIsPublished());
             return new ResponseData<>(eventRepository.save(event), "Event inserted successfully");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }

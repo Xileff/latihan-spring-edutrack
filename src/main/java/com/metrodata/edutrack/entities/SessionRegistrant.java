@@ -1,5 +1,6 @@
 package com.metrodata.edutrack.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.metrodata.edutrack.entities.enums.ParticipantStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -34,9 +35,11 @@ public class SessionRegistrant {
 
     @ManyToOne
     @JoinColumn(name = "participant_id", referencedColumnName = "id")
+    @JsonBackReference
     private Participant participant;
 
     @ManyToOne
     @JoinColumn(name = "session_detail_id", referencedColumnName = "id")
+    @JsonBackReference
     private SessionDetail sessionDetail;
 }

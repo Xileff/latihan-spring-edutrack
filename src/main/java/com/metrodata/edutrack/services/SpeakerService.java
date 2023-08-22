@@ -13,8 +13,8 @@ import java.util.List;
 
 @Service
 public class SpeakerService {
-    private SpeakerRepository speakerRepository;
-    private SponsorService sponsorService;
+    private final SpeakerRepository speakerRepository;
+    private final SponsorService sponsorService;
 
     @Autowired
     public SpeakerService(SpeakerRepository speakerRepository, SponsorService sponsorService) {

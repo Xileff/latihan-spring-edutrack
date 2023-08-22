@@ -14,8 +14,8 @@ import java.util.List;
 
 @Service
 public class SponsorService {
-    private SponsorRepository sponsorRepository;
-    private EventService eventService;
+    private final SponsorRepository sponsorRepository;
+    private final EventService eventService;
 
     @Autowired
     public SponsorService(SponsorRepository sponsorRepository, EventService eventService) {

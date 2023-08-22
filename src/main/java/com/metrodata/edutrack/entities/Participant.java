@@ -1,10 +1,14 @@
 package com.metrodata.edutrack.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.metrodata.edutrack.entities.enums.Occupation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Table(name = "tb_m_participants")
 @Entity @Data
@@ -35,8 +39,10 @@ public class Participant {
 
     @ManyToOne
     @JoinColumn(name = "event_id", referencedColumnName = "id")
+    @JsonBackReference
     private Event event;
 
-    @OneToOne(mappedBy = "participant")
-    private SessionRegistrant sessionRegistrant;
+    @OneToMany(mappedBy = "participant", fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<SessionRegistrant> sessionRegistrant;
 }

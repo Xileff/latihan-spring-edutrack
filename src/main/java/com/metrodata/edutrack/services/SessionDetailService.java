@@ -13,8 +13,8 @@ import java.util.List;
 
 @Service
 public class SessionDetailService {
-    private SessionDetailRepository sessionDetailRepository;
-    private SessionService sessionService;
+    private final SessionDetailRepository sessionDetailRepository;
+    private final SessionService sessionService;
     @Autowired
     public SessionDetailService (SessionDetailRepository sessionDetailRepository, SessionService sessionService) {
         this.sessionDetailRepository = sessionDetailRepository;

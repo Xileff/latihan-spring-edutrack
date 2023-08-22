@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class CertificateTemplateService {
-    private CertificateTemplateRepository certificateTemplateRepository;
+    private final CertificateTemplateRepository certificateTemplateRepository;
 
     @Autowired
     public CertificateTemplateService (CertificateTemplateRepository certificateTemplateRepository) {

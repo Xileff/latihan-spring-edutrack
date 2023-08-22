@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public class RoomService {
-    private RoomRepository roomRepository;
+    private final RoomRepository roomRepository;
 
     @Autowired
     public RoomService(RoomRepository roomRepository) {
