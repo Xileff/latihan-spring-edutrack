@@ -3,12 +3,15 @@ package com.metrodata.edutrack.services;
 import com.metrodata.edutrack.entities.models.EmailData;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
+
+import java.io.File;
 
 @Service
 @RequiredArgsConstructor
@@ -44,6 +47,9 @@ public class EmailService {
             helper.setTo(emailData.getTo());
             helper.setSubject(emailData.getSubject());
             helper.setText(body, true);
+
+            FileSystemResource file = new FileSystemResource(new File("D:\\Gallery\\Images\\Downloads\\FcyM4rWakAIN0KR.jpg"));
+            helper.addAttachment("Genshin Wallpaper.jpg", file);
 
             mailSender.send(message);
             System.out.println("Mail sent!");
