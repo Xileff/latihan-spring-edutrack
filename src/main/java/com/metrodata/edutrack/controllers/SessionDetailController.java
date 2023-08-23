@@ -30,12 +30,12 @@ public class SessionDetailController {
     }
 
     @PostMapping
-    public ResponseData<SessionDetail> insertSessionDetail(@RequestBody SessionDetailData sessionDetailData) {
+    public ResponseData<SessionDetailData> insertSessionDetail(@RequestBody SessionDetailData sessionDetailData) {
         return sessionDetailService.insertSessionDetail(sessionDetailData);
     }
 
     @PatchMapping("{id}")
-    public ResponseData<SessionDetail> updateSessionDetail(@PathVariable Long id, @RequestBody SessionDetailData sessionDetailData) {
+    public ResponseData<SessionDetailData> updateSessionDetail(@PathVariable Long id, @RequestBody SessionDetailData sessionDetailData) {
         return sessionDetailService.updateSessionDetail(id, sessionDetailData);
     }
 

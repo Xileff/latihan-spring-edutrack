@@ -9,4 +9,5 @@ public class SessionDetailData {
     private Integer capacity;
     private String description;
     private Long sessionId;
+    private String certificateUrl;
 }

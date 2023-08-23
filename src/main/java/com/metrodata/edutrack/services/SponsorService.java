@@ -76,6 +76,7 @@ public class SponsorService {
 
     private SponsorData convertToDTO(Sponsor sponsor) {
         SponsorData sponsorData = new SponsorData();
+        sponsorData.setId(sponsor.getId());
         sponsorData.setName(sponsor.getName());
         sponsorData.setLogoUrl(sponsor.getLogoUrl());
         sponsorData.setSponsorCategory(sponsor.getSponsorCategory());

@@ -1,6 +1,7 @@
 package com.metrodata.edutrack.services;
 
 import com.metrodata.edutrack.controllers.SessionDetailController;
+import com.metrodata.edutrack.entities.CertificateTemplate;
 import com.metrodata.edutrack.entities.SessionDetail;
 import com.metrodata.edutrack.entities.models.ResponseData;
 import com.metrodata.edutrack.entities.models.SessionDetailData;
@@ -37,27 +38,37 @@ public class SessionDetailService {
         return convertToDTO(sessionDetail);
     }
 
-    public ResponseData<SessionDetail> insertSessionDetail(SessionDetailData sessionDetailData) {
+    public ResponseData<SessionDetailData> insertSessionDetail(SessionDetailData sessionDetailData) {
         try {
             SessionDetail sessionDetail = new SessionDetail();
             sessionDetail.setName(sessionDetailData.getName());
             sessionDetail.setCapacity(sessionDetailData.getCapacity());
             sessionDetail.setDescription(sessionDetailData.getDescription());
             sessionDetail.setSession(sessionService.getSessionById(sessionDetailData.getSessionId()));
-            return new ResponseData<>(sessionDetailRepository.save(sessionDetail), "Session inserted successfully.");
+
+            CertificateTemplate certificateTemplate = new CertificateTemplate();
+            certificateTemplate.setCertificateUrl(sessionDetailData.getCertificateUrl());
+            certificateTemplate.setSessionDetail(sessionDetail);
+
+            sessionDetail.setCertificateTemplate(certificateTemplate);
+            sessionDetailRepository.save(sessionDetail);
+
+            return new ResponseData<>(sessionDetailData, "Session inserted successfully.");
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 
-    public ResponseData<SessionDetail> updateSessionDetail(Long id, SessionDetailData sessionDetailData) {
+    public ResponseData<SessionDetailData> updateSessionDetail(Long id, SessionDetailData sessionDetailData) {
         try {
             SessionDetail sessionDetail = getSessionDetailById(id);
             sessionDetail.setName(sessionDetailData.getName());
             sessionDetail.setCapacity(sessionDetailData.getCapacity());
             sessionDetail.setDescription(sessionDetailData.getDescription());
             sessionDetail.setSession(sessionService.getSessionById(sessionDetailData.getSessionId()));
-            return new ResponseData<>(sessionDetailRepository.save(sessionDetail), "Session with ID : " + id + "updated successfully.");
+
+            sessionDetailRepository.save(sessionDetail);
+            return new ResponseData<>(sessionDetailData, "Session with ID : " + id + "updated successfully.");
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
