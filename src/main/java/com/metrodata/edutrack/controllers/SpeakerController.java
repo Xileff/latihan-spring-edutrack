@@ -20,13 +20,13 @@ public class SpeakerController {
     }
 
     @GetMapping
-    public List<Speaker> getSpeakers() {
+    public List<SpeakerData> getSpeakers() {
         return speakerService.getSpeakers();
     }
 
     @GetMapping("{id}")
-    public Speaker getSpeakerById(@PathVariable Long id) {
-        return speakerService.getSpeakerById(id);
+    public SpeakerData getSpeakerById(@PathVariable Long id) {
+        return speakerService.getSpeakerDTOById(id);
     }
 
     @PostMapping

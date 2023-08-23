@@ -20,13 +20,13 @@ public class SessionDetailController {
     }
 
     @GetMapping
-    public List<SessionDetail> getSessionDetails() {
+    public List<SessionDetailData> getSessionDetails() {
         return sessionDetailService.getSessionDetails();
     }
 
     @GetMapping("{id}")
-    public SessionDetail getSessionDetailById(@PathVariable Long id) {
-        return sessionDetailService.getSessionDetailById(id);
+    public SessionDetailData getSessionDetailById(@PathVariable Long id) {
+        return sessionDetailService.getSessionDetailDTOById(id);
     }
 
     @PostMapping

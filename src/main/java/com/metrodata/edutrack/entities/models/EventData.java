@@ -9,6 +9,7 @@ import java.time.LocalTime;
 
 @Data
 public class EventData {
+    private Long id;
     private String name;
     private String slug;
 

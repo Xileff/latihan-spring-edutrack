@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SessionService {
@@ -22,12 +23,17 @@ public class SessionService {
         this.eventService = eventService;
     }
 
-    public List<Session> getSessions() {
-        return sessionRepository.findAll();
+    public List<SessionData> getSessions() {
+        return sessionRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     public Session getSessionById(Long id) {
         return sessionRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Session with ID : " + id + " not found"));
+    }
+
+    public SessionData getSessionDTOById(Long id) {
+        Session session = getSessionById(id);
+        return convertToDTO(session);
     }
 
     public ResponseData<Session> insertSession(SessionData sessionData) {
@@ -70,5 +76,18 @@ public class SessionService {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
+    }
+
+    private SessionData convertToDTO(Session session) {
+        SessionData sessionData = new SessionData();
+        sessionData.setId(session.getId());
+        sessionData.setName(session.getName());
+        sessionData.setType(session.getType());
+        sessionData.setDescription(session.getDescription());
+        sessionData.setNeedAttendance(session.getNeedAttendance());
+        sessionData.setStartTime(session.getStartTime());
+        sessionData.setEndTime(session.getEndTime());
+        sessionData.setEventId(session.getEvent().getId());
+        return sessionData;
     }
 }

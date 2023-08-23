@@ -21,13 +21,13 @@ public class ParticipantController {
     }
 
     @GetMapping
-    public List<Participant> getParticipants() {
+    public List<ParticipantData> getParticipants() {
         return participantService.getParticipants();
     }
 
     @GetMapping("{id}")
-    public Participant getParticipantById(@PathVariable Long id) {
-        return participantService.getParticipantById(id);
+    public ParticipantData getParticipantById(@PathVariable Long id) {
+        return participantService.getParticipantDTOById(id);
     }
 
     @PostMapping

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EventService {
@@ -20,12 +21,18 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public List<Event> getEvents() {
-        return eventRepository.findAll();
+    public List<EventData> getEvents() {
+        List<Event> events = eventRepository.findAll();
+        return events.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     public Event getEventById(Long id) {
         return eventRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with ID : " + id + " not found"));
+    }
+
+    public EventData getEventDTOById(Long id) {
+        Event event = getEventById(id);
+        return convertToDTO(event);
     }
 
     public ResponseData<Event> insertEvent(EventData eventData) {
@@ -78,5 +85,24 @@ public class EventService {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
+    }
+
+    private EventData convertToDTO(Event event) {
+        EventData eventData = new EventData();
+        eventData.setId(event.getId());
+        eventData.setName(event.getName());
+        eventData.setSlug(event.getSlug());
+        eventData.setStartTime(event.getStartTime());
+        eventData.setStartDate(event.getStartDate());
+        eventData.setEndDate(event.getEndDate());
+        eventData.setStartRegistration(event.getStartRegistration());
+        eventData.setCloseRegistration(event.getCloseRegistration());
+        eventData.setCapacity(event.getCapacity());
+        eventData.setDescription(event.getDescription());
+        eventData.setLocation(event.getLocation());
+        eventData.setImageUrl(event.getImageUrl());
+        eventData.setIsPublished(event.getIsPublished());
+
+        return eventData;
     }
 }

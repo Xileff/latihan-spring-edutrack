@@ -20,13 +20,13 @@ public class EventController {
     }
 
     @GetMapping
-    public List<Event> getEvents() {
+    public List<EventData> getEvents() {
         return eventService.getEvents();
     }
 
     @GetMapping("{id}")
-    public Event getEventById(@PathVariable Long id) {
-        return eventService.getEventById(id);
+    public EventData getEventById(@PathVariable Long id) {
+        return eventService.getEventDTOById(id);
     }
 
     @PostMapping

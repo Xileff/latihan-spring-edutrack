@@ -1,5 +1,6 @@
 package com.metrodata.edutrack.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,11 @@ public class Room {
 
     @Column(nullable = false, length = 100)
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
+    @JsonBackReference
+    private Event event;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference

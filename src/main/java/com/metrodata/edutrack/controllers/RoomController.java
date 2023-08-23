@@ -20,13 +20,13 @@ public class RoomController {
     }
 
     @GetMapping
-    public List<Room> getRooms() {
+    public List<RoomData> getRooms() {
         return roomService.getRooms();
     }
 
     @GetMapping("{id}")
-    public Room getRoomById(@PathVariable Long id) {
-        return roomService.getRoomById(id);
+    public RoomData getRoomById(@PathVariable Long id) {
+        return roomService.getRoomDTOById(id);
     }
 
     @PostMapping

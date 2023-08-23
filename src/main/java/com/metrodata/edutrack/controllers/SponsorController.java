@@ -22,13 +22,13 @@ public class SponsorController {
     }
 
     @GetMapping
-    public List<Sponsor> getSponsors() {
+    public List<SponsorData> getSponsors() {
         return sponsorService.getSponsors();
     }
 
     @GetMapping("{id}")
-    public Sponsor getSponsorById(@PathVariable Long id) {
-        return sponsorService.getSponsorById(id);
+    public SponsorData getSponsorById(@PathVariable Long id) {
+        return sponsorService.getSponsorDTOById(id);
     }
 
     @PostMapping

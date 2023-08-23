@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CertificateTemplateService {
@@ -20,14 +21,20 @@ public class CertificateTemplateService {
         this.certificateTemplateRepository = certificateTemplateRepository;
     }
 
-    public List<CertificateTemplate> getCertificateTemplates() {
-        return certificateTemplateRepository.findAll();
+    public List<CertificateTemplateData> getCertificateTemplates() {
+        List<CertificateTemplate> certificateTemplates =  certificateTemplateRepository.findAll();
+        return certificateTemplates.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     public CertificateTemplate getCertificateTemplateById(Long id) {
         return certificateTemplateRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Certificate Template with ID : " + id + " not found"));
+    }
+
+    public CertificateTemplateData getCertificateTemplateDTOById(Long id) {
+        CertificateTemplate certificateTemplate = getCertificateTemplateById(id);
+        return convertToDTO(certificateTemplate);
     }
 
     public ResponseData<CertificateTemplate> insertCertificateTemplate(CertificateTemplateData certificateTemplateData) {
@@ -61,5 +68,12 @@ public class CertificateTemplateService {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
+    }
+
+    private CertificateTemplateData convertToDTO(CertificateTemplate certificateTemplate) {
+        CertificateTemplateData certificateTemplateData = new CertificateTemplateData();
+        certificateTemplateData.setId(certificateTemplate.getId());
+        certificateTemplateData.setCertificateUrl(certificateTemplate.getCertificateUrl());
+        return certificateTemplateData;
     }
 }

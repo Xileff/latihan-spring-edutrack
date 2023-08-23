@@ -20,13 +20,13 @@ public class CertificateTemplateController {
     }
 
     @GetMapping
-    public List<CertificateTemplate> getCertificateTemplates() {
+    public List<CertificateTemplateData> getCertificateTemplates() {
         return certificateTemplateService.getCertificateTemplates();
     }
 
     @GetMapping("{id}")
-    public CertificateTemplate getCertificateTemplateById(@PathVariable Long id) {
-        return certificateTemplateService.getCertificateTemplateById(id);
+    public CertificateTemplateData getCertificateTemplateById(@PathVariable Long id) {
+        return certificateTemplateService.getCertificateTemplateDTOById(id);
     }
 
     @PostMapping

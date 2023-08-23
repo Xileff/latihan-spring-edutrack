@@ -4,12 +4,14 @@ import com.metrodata.edutrack.entities.Participant;
 import com.metrodata.edutrack.entities.models.ParticipantData;
 import com.metrodata.edutrack.entities.models.ResponseData;
 import com.metrodata.edutrack.repositories.ParticipantRepository;
+import jakarta.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ParticipantService {
@@ -22,13 +24,19 @@ public class ParticipantService {
         this.eventService = eventService;
     }
 
-    public List<Participant> getParticipants() {
-        return participantRepository.findAll();
+    public List<ParticipantData> getParticipants() {
+        List<Participant> participants = participantRepository.findAll();
+        return participants.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     public Participant getParticipantById(Long id) {
         return participantRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Participant with ID : " + id + "not found."));
+    }
+
+    public ParticipantData getParticipantDTOById(Long id) {
+        Participant participant = getParticipantById(id);
+        return convertToDTO(participant);
     }
 
     public ResponseData<Participant> insertParticipant(ParticipantData participantData) {
@@ -72,5 +80,16 @@ public class ParticipantService {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
+    }
+
+    private ParticipantData convertToDTO(Participant participant) {
+        ParticipantData participantData = new ParticipantData();
+        participantData.setId(participant.getId());
+        participantData.setName(participant.getName());
+        participantData.setEmail(participant.getEmail());
+        participantData.setOccupation(participant.getOccupation());
+        participantData.setUniversity(participant.getUniversity());
+        participantData.setPhoneNumber(participant.getPhoneNumber());
+        return participantData;
     }
 }

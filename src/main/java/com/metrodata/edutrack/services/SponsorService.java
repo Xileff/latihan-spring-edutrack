@@ -11,6 +11,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SponsorService {
@@ -23,13 +24,18 @@ public class SponsorService {
         this.eventService = eventService;
     }
 
-    public List<Sponsor> getSponsors() {
-        return sponsorRepository.findAll();
+    public List<SponsorData> getSponsors() {
+        return sponsorRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     public Sponsor getSponsorById(Long id) {
         return sponsorRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Sponsor with ID : " + id + " not found."));
+    }
+
+    public SponsorData getSponsorDTOById(Long id) {
+        Sponsor sponsor = getSponsorById(id);
+        return convertToDTO(sponsor);
     }
 
     public ResponseData<Sponsor> insertSponsor(SponsorData sponsorData) {
@@ -66,5 +72,14 @@ public class SponsorService {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
+    }
+
+    private SponsorData convertToDTO(Sponsor sponsor) {
+        SponsorData sponsorData = new SponsorData();
+        sponsorData.setName(sponsor.getName());
+        sponsorData.setLogoUrl(sponsor.getLogoUrl());
+        sponsorData.setSponsorCategory(sponsor.getSponsorCategory());
+        sponsorData.setEventId(sponsor.getEvent().getId());
+        return sponsorData;
     }
 }

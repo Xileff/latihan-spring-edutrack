@@ -10,6 +10,7 @@ import java.time.LocalTime;
 
 @Data
 public class SessionData {
+    private Long id;
     private String name;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")

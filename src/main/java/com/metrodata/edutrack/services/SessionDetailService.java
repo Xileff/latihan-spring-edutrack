@@ -1,5 +1,6 @@
 package com.metrodata.edutrack.services;
 
+import com.metrodata.edutrack.controllers.SessionDetailController;
 import com.metrodata.edutrack.entities.SessionDetail;
 import com.metrodata.edutrack.entities.models.ResponseData;
 import com.metrodata.edutrack.entities.models.SessionDetailData;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SessionDetailService {
@@ -21,13 +23,18 @@ public class SessionDetailService {
         this.sessionService = sessionService;
     }
 
-    public List<SessionDetail> getSessionDetails() {
-        return sessionDetailRepository.findAll();
+    public List<SessionDetailData> getSessionDetails() {
+        return sessionDetailRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     public SessionDetail getSessionDetailById(Long id) {
         return sessionDetailRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Session with ID : " + id + " not found."));
+    }
+
+    public SessionDetailData getSessionDetailDTOById(Long id) {
+        SessionDetail sessionDetail = getSessionDetailById(id);
+        return convertToDTO(sessionDetail);
     }
 
     public ResponseData<SessionDetail> insertSessionDetail(SessionDetailData sessionDetailData) {
@@ -64,5 +71,15 @@ public class SessionDetailService {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
+    }
+
+    private SessionDetailData convertToDTO(SessionDetail sessionDetail) {
+        SessionDetailData sessionDetailData = new SessionDetailData();
+        sessionDetailData.setId(sessionDetail.getId());
+        sessionDetailData.setCapacity(sessionDetail.getCapacity());
+        sessionDetailData.setSessionId(sessionDetail.getSession().getId());
+        sessionDetailData.setName(sessionDetail.getName());
+        sessionDetailData.setDescription(sessionDetail.getDescription());
+        return sessionDetailData;
     }
 }

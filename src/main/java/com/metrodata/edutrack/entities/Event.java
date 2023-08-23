@@ -1,5 +1,6 @@
 package com.metrodata.edutrack.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -72,4 +73,8 @@ public class Event {
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Session> sessions;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<Room> rooms;
 }
