@@ -1,6 +1,7 @@
 package com.metrodata.edutrack.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,7 @@ public class SessionDetail {
 
     @OneToOne(mappedBy = "sessionDetail", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn
+    @JsonIgnore
     private CertificateTemplate certificateTemplate;
 
     @OneToMany(mappedBy = "sessionDetail", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

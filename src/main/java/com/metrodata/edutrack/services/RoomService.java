@@ -15,10 +15,12 @@ import java.util.stream.Collectors;
 @Service
 public class RoomService {
     private final RoomRepository roomRepository;
+    private final EventService eventService;
 
     @Autowired
-    public RoomService(RoomRepository roomRepository) {
+    public RoomService(RoomRepository roomRepository, EventService eventService) {
         this.roomRepository = roomRepository;
+        this.eventService = eventService;
     }
 
     public List<RoomData> getRooms() {
@@ -40,6 +42,7 @@ public class RoomService {
         try {
             Room room = new Room();
             room.setName(roomData.getName());
+            room.setEvent(eventService.getEventById(roomData.getEventId()));
             return new ResponseData<>(roomRepository.save(room), "Room inserted successfully.");
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
@@ -50,6 +53,7 @@ public class RoomService {
         try {
             Room room = getRoomById(id);
             room.setName(roomData.getName());
+            room.setEvent(eventService.getEventById(roomData.getEventId()));
             return new ResponseData<>(roomRepository.save(room), "Room with ID : " + id + " updated successfully.");
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());

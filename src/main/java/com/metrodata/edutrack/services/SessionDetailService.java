@@ -86,7 +86,6 @@ public class SessionDetailService {
 
     private SessionDetailData convertToDTO(SessionDetail sessionDetail) {
         SessionDetailData sessionDetailData = new SessionDetailData();
-        sessionDetailData.setId(sessionDetail.getId());
         sessionDetailData.setCapacity(sessionDetail.getCapacity());
         sessionDetailData.setSessionId(sessionDetail.getSession().getId());
         sessionDetailData.setName(sessionDetail.getName());

@@ -28,7 +28,7 @@ public class EmailService {
             message.setSubject(emailData.getSubject());
             message.setText(emailData.getBody());
 
-            mailSender.send(message);
+            mailSender.send(message); // need to generate a new password
             System.out.println("Mail sent!");
             return emailData;
         } catch (Exception e) {
